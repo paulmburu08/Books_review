@@ -1,7 +1,6 @@
 from flask import render_template, request, Blueprint
-from flaskblog.models import Post
-
-main = Blueprint('main', __name__)
+from app.main import main
+from app.models import Post
 
 
 @main.route("/")

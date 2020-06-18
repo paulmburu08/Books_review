@@ -11,10 +11,10 @@ from flask_wtf.csrf import CSRFProtect
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 mail = Mail()
-bootstap = Bootstrap()
+bootstrap = Bootstrap()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.login'
+login_manager.login_view = 'user.login'
 photos = UploadSet('photos',IMAGES)
 
 
@@ -28,6 +28,7 @@ def create_app(config_name):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    bootstrap.init_app(app)
 
     from .users.routes import users as users_blueprint
     from .posts.routes import posts as posts_blueprint

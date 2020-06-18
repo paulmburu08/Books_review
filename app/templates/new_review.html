@@ -1,0 +1,40 @@
+{% extends 'layout.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+      <div class="comment">
+
+          {{ wtf.quick_form(form) }}
+
+      </div><br><br>
+    </div>
+      {% for review in reviews %}
+      <div class="card card1">
+        <p class="comments">{{review.title}}</p>
+      <p class="comments">{{review.review}}</p>
+      </div>
+      <!-- {% if review.user == current_user %}
+      <button class="btn btn-danger btn-sm m-1 deleteComment" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+      {% endif %}
+      </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <form action="{{ url_for('main.delete_comment',comment_id = comment.id,id = comment.blog_id) }}" method="POST">
+                 <input class="btn btn-danger" type="submit" value="Delete">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      {% endfor %}
+</div>
+{% endblock %}

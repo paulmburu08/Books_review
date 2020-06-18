@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    SQLALCHEMY_DATABASE_URI ='postgresql+psycopg2://midumbi:midumbi@localhost/book_review'
+    SQLALCHEMY_DATABASE_URI ='postgresql+psycopg2://paul:pauldatabase@localhost/bookreview1'
     SQLALCHEMY_TRACK_MODIFICATIONS=True
     SECRET_KEY=os.environ.get('SECRET_KEY')
     UPLOADED_PHOTOS_DEST ='static/profile_pics'
@@ -20,10 +20,10 @@ class ProdConfig(Config):
     pass
      
 class TestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://midumbi:midumbi@localhost/book_test'    
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://paul:pauldatabase@localhost/bookreview1'    
 
 class DevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://midumbi:midumbi@localhost/book_review'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://paul:pauldatabase@localhost/bookreview1'
     
     
     DEBUG = True

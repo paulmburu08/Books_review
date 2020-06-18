@@ -8,6 +8,12 @@ class PostForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
     submit = SubmitField('Post')
 
+class ReviewForm(FlaskForm):
+
+    title = StringField('Title',validators=[Required()])
+    review = TextAreaField('Review', validators=[Required()])
+    submit = SubmitField('Submit')
+
 class Search(FlaskForm):
     search_item = SelectField(u'Select Category', choices=[('title','Title'),('author','Author'),('isbn','ISBN number')],validators=[Required()])
     name = TextAreaField('Content', validators=[DataRequired()])

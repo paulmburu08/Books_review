@@ -2,7 +2,7 @@ import csv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-engine = create_engine('postgresql+psycopg2://midumbi:midumbi@localhost/book_review')
+engine = create_engine('postgresql+psycopg2://paul:pauldatabase@localhost/bookreview1')
 db = scoped_session(sessionmaker(bind=engine))
 
 

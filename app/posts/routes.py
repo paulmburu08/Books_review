@@ -2,8 +2,10 @@ from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request, abort, jsonify, Blueprint
 from flask_login import current_user, login_required
 from app import db
-from app.models import Post, Books
-from app.posts.forms import PostForm, Search
+from app.models import Post, Books,Review
+from app.posts.forms import PostForm
+from .forms import Search,ReviewForm
+from ..models import Books,Review
 import requests
 
 posts = Blueprint('posts', __name__)
@@ -59,33 +61,53 @@ def delete_post(post_id):
     return redirect(url_for('main.home'))
 
 
-@posts.route("/search")
+@posts.route("/search" , methods=['POST', 'GET'])
 @login_required
 def search():
     form = Search()
     if form.search_item.data == 'title' and form.validate_on_submit():
         books = Books.query.filter_by(name = form.name.data).first()
 
-        return redirect(url_for('posts.results'), books = books)
+        return render_template('results.html', books = books)
 
     elif form.search_item.data == 'author' and form.validate_on_submit():
         books = Books.query.filter_by(author = form.name.data).first()
 
-        return redirect(url_for('posts.results'), books = books)
+        return render_template('results.html', books = books)
 
     elif form.search_item.data == 'isbn' and form.validate_on_submit():
         books = Books.query.filter_by(book_num = form.name.data).first()
 
-        return redirect(url_for('posts.results'), books = books)
- 
-    return render_template('search.html', title='Search', form = form)
+        return render_template('results.html', books = books)
 
+    return render_template('search.html', title='Search', form = form)
 
 @posts.route("/results", methods=['POST', 'GET'])
 @login_required
 def results():
     return render_template('results.html')
 
+@posts.route('/results/<int:id>/review',methods = ['GET','POST'])
+@login_required
+def new_review(id):
+
+    book = Books.query.filter_by(id = id).first()
+    form = ReviewForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        review = form.review.data
+
+        new_review = Review(title = title, review = review)
+
+        new_review.save_review()
+
+        return redirect(url_for('posts.new_review',id = book.id, user = current_user ))
+        
+    reviews = Review.query.filter_by(books_id = id).order_by(Review.date.desc())
+    title = 'Reviews'
+    return render_template('new_review.html', title= title,form = form, reviews = reviews)
+
+    
 @posts.route("/<string:book_num>", methods=['POST', 'GET'])
 @login_required
 def book(book_num):

@@ -37,21 +37,45 @@ class User(db.Model, UserMixin):
 
 
 class Post(db.Model):
+    __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    book_num = db.Column(db.String, db.ForeignKey('books.book_num'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    book_num = db.Column(db.Integer, db.ForeignKey('books.id'))
     rating = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f'User {self.title}'
 
 
 class Books(db.Model):
+    __tablename__ = 'books'
+
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     year = db.Column(db.Integer, nullable=False)
     author = db.Column(db.String, nullable=False)
-    book_num = db.Column(db.String, nullable=False, primary_key=True)
-    posts = db.relationship('Post', backref='book', lazy=True)
+    book_num = db.Column(db.String, nullable=False)
+    posts = db.relationship('Post', backref='book', lazy='dynamic')
+    review = db.relationship('Review',backref = 'book',lazy="dynamic")
 
     def __repr__(self):
         return f"Post('{self.id}', '{self.title}', '{self.date_posted}')"
+
+class Review(db.Model):
+    __tablename__ = 'reviews'
+
+    id = db.Column(db.Integer,primary_key = True)
+    title = db.Column(db.String)
+    review = db.Column(db.String)
+    date = db.Column(db.DateTime,default = datetime.utcnow)
+    books_id = db.Column(db.Integer,db.ForeignKey('books.id'))
+
+    def save_review(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def __repr__(self):
+        return f'User {self.title}'

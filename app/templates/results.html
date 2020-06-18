@@ -3,12 +3,11 @@
 <div class="card1">
 <h2 class="border-bottom mb-4">Search Results:</h2>
 <div class="list-group">
-{% for book in books %}
-<a href="{{ url_for('posts.book', book_num=book.book_num) }}" class="list-group-item list-group-item-action"><h6>{{ book.name }}</h6>
-<p>Author: {{ book.author }}</p></a>
 
-{% endfor %}
-</div>
+<a href="{{ url_for('posts.book', book_num=books.book_num) }}" class="list-group-item list-group-item-action"><h6>{{ books.name }}</h6>
+<p>Author: {{ books.author }}</p></a>
+<a href="/results/{{ books.id }}/review" class="comment btn btn-link btn-sm m-1"><i class="fa fa-comment" aria-hidden="true"></i>Reviews</a>
+
 </div>
 
 

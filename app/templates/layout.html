@@ -19,7 +19,7 @@
         <!--The Title of the page "Book Reviews" -->
         <header>
 			<h1><a href="{{ url_for('main.home') }}" style="text-decoration:none;font-weight:bold;color:#9e2796;">Books Reviews Website</a></h1>
-			<h4>“Books are the quietest and most constant of friends; they are the most accessible and wisest of counselors, and the most patient of teachers.”</h4>
+			<h4>some slogan here</h4>
         </header>
        <!--Navigation Bar-->
         <nav class="row clearfix">
@@ -50,16 +50,16 @@
             <div class="col-lg-2">
                 <div class="card1">
                     {% if current_user.is_authenticated %}
-                        <h4 class="shadow-sm p-2 mb-3 bg-white rounded" style="text-align: center;">Wellcome</h4>
+                        <h4 class="shadow-sm p-2 mb-3 bg-white rounded" style="text-align: center;">Welcome</h4>
                         <ul class="list-group">
-                            <li class="list-group-item" style="text-align: center; font-weight:bold;"><a href="{{ url_for('users.account') }}" class="links-custom">Account</a></li>
-                            <li class="list-group-item" style="text-align: center;font-weight:bold;"><a href="{{ url_for('users.logout') }}" class="links-custom">Logout</a></li>
+                            <li class="list-group-item" style="text-align: center; font-weight:bold;"><a href="{{ url_for('user.account') }}" class="links-custom">Account</a></li>
+                            <li class="list-group-item" style="text-align: center;font-weight:bold;"><a href="{{ url_for('user.logout') }}" class="links-custom">Logout</a></li>
                         </ul>
                     {% else %}
                         <h4 class="shadow-sm p-2 mb-3 bg-white rounded" style="text-align: center;">Hello, Guest</h4>
                         <ul class="list-group">
-                            <li class="list-group-item" style="text-align: center;font-weight:bold;"><a href="{{ url_for('users.login') }}" class="links-custom">Login</a></li>
-                            <li class="list-group-item" style="text-align: center;font-weight:bold;"><a href="{{ url_for('users.register') }}" class="links-custom">Register</a></li>
+                            <li class="list-group-item" style="text-align: center;font-weight:bold;"><a href="{{ url_for('user.login') }}" class="links-custom">Login</a></li>
+                            <li class="list-group-item" style="text-align: center;font-weight:bold;"><a href="{{ url_for('user.register') }}" class="links-custom">Register</a></li>
                         </ul>
                     {% endif %}
                 </div>

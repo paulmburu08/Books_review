@@ -90,7 +90,7 @@ def book(book_num):
     posts = Post.query.filter_by(book_num=book_num).all()
 
     # Get APIs from Goodreads.
-    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "9p5DL4xMYjGwUyWDLfgDw", "isbns": book_num})
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "OZ4Itd0OJDETG4j2dgo68g", "isbns": book_num})
     if res.status_code != 200:
         raise Exception("ERROR: API request unsuccessful for.")
     data = res.json()

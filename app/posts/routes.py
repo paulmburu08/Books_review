@@ -1,9 +1,9 @@
 from datetime import datetime
 from flask import render_template, url_for, flash, redirect, request, abort, jsonify, Blueprint
 from flask_login import current_user, login_required
-from flaskblog import db
-from flaskblog.models import Post, Books
-from flaskblog.posts.forms import PostForm
+from app import db
+from app.models import Post, Books
+from app.posts.forms import PostForm
 import requests
 
 posts = Blueprint('posts', __name__)
